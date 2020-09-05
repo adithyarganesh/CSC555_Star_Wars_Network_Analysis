@@ -124,7 +124,7 @@ def loop(episode, feature):
     with open(f'data/starwars-episode-{episode}-{feature}.json') as f:
         data = json.load(f)
 
-    with open('myfile.json') as d:
+    with open('character_side.json') as d:
         sides = json.load(d)
 
     characters = {
