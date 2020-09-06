@@ -21,3 +21,12 @@ character_side.json contains annotation of which side the character belongs to.
 
 # Results
 All the results have been analysed and the analysis metrics have been explained in detail in P1.pdf attached here as well as uploaded in the moodle portal
+
+# Issues
+To ensure the code doesn't break, kindly ensure the requirements.txt is run as follows - pip install -r requirements.txt/
+
+Furthermore, ensure the libraries are correctly installed
+- pip install networkx
+- pip install matplotlib
+
+pip/ pip3 based on Python usage 
