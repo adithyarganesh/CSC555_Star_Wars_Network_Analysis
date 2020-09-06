@@ -39,11 +39,11 @@ def get_graph(data, episode):
         G.add_edge(edge[0], edge[1])
 
     # Uncomment block for graph visualization
-    # plt.figure(figsize=(30, 15))
-    # plt.subplot(121)
-    # nx.draw(G, with_labels=True)
-    # plt.savefig(f'task4_results/graphs/Episode_{episode}_Graph.png')
-    # plt.close()
+    plt.figure(figsize=(30, 15))
+    plt.subplot(121)
+    nx.draw(G, with_labels=True)
+    plt.savefig(f'task4_results/graphs/Episode_{episode}_Graph.png')
+    plt.close()
 
     return G
 
@@ -163,11 +163,11 @@ def loop(episode, feature):
     Graph = get_graph(data, episode)
 
     #     Task 2 Hypothesis 2
-    betweenness = sort(centrality.betweenness_centrality(Graph))[:5]
-    degree_centrality = sort(connections)[:5]
+    betweenness = sort(centrality.betweenness_centrality(Graph))[:5] + sort(centrality.betweenness_centrality(Graph))[-5:]
+    degree_centrality = sort(connections)[:5] + sort(connections)[-5:]
 
     #     Task 3
-    cliquishness = sort(nx.clustering(Graph))[:5]
+    cliquishness = sort(nx.clustering(Graph))[:5] + sort(nx.clustering(Graph))[-5:]
     path_length = list(nxpath.shortest_path_length(Graph))
     randomness = get_randomness(Graph, probability)
 
@@ -187,13 +187,13 @@ def loop(episode, feature):
 
     # Uncomment block for visualizations
 
-    # plt.figure(figsize=(25, 10))
-    # plt.title(f'Episode-{episode} {feature}')
-    # plt.plot(list(zip(*temp))[0], list(zip(*temp))[1], list(zip(*temp))[0], list(zip(*temp))[2], list(zip(*temp))[0],
-    #          list(zip(*temp))[3])
-    # plt.xticks(list(zip(*temp))[0][::1], rotation='vertical')
-    # plt.savefig(f'task4_results/images/Episode_{episode}_{feature}.png')
-    # plt.close()
+    plt.figure(figsize=(25, 10))
+    plt.title(f'Episode-{episode} {feature}')
+    plt.plot(list(zip(*temp))[0], list(zip(*temp))[1], list(zip(*temp))[0], list(zip(*temp))[2], list(zip(*temp))[0],
+             list(zip(*temp))[3])
+    plt.xticks(list(zip(*temp))[0][::1], rotation='vertical')
+    plt.savefig(f'task4_results/images/Episode_{episode}_{feature}.png')
+    plt.close()
 
     return (homophily, classification), (betweenness, degree_centrality), (cliquishness, path_length, randomness[1]), (
     connections, interractions)
@@ -223,7 +223,7 @@ if __name__ == "__main__":
               f"Betweenness \n {hypothesis_2[0]} \n\n "
               f"Degree_centrality \n {hypothesis_2[1]}")
         print(f"\n Task 3 \n\n Cliquishness \n {task_3[0]} \n\n "
-              f"Path_length \n {task_3[1]} \n \n "
+              f"Path_length \n {task_3[1][1]} \n \n "
               f"Average Path Length when adding randomness \n {task_3[2]}")
         print(f"\n Task 4 and 5 \n\n "
               f"Connections \n {task_4_and_5[0]} \n\n "
